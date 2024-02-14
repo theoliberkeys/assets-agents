@@ -82,8 +82,8 @@ var beige = rgb(0.99, 0.95, 0.93);
 var marron = rgb(0.14, 0.11, 0.10);
 var orange = rgb(0.93, 0.58, 0.45);
 var rouge = rgb(1, 0, 0);
-var ppsansregu = 'https://cdn.jsdelivr.net/gh/theoliberkeys/assets-agents/ppsansregu.otf';
-var ppsansextra = 'https://cdn.jsdelivr.net/gh/theoliberkeys/assets-agents/ppsansextra.otf';
+var ppsansregu = 'ppsansregu.otf';
+var ppsansextra = 'ppsansextra.otf';
 
 // Panneau simple
 async function panneau_simple(nom, numero, fichier, photo) {
