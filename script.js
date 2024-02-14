@@ -76,14 +76,14 @@ function draw_Text(source, page, axeX, axeY, taille, police, couleur) {
 }
 
 // Fonctions d'exécution
-const { degrees, PDFDocument, rgb, StandardFonts } = PDFLib
+const { degrees, PDFDocument, rgb, StandardFonts } = PDFLib;
 
 var beige = rgb(0.99, 0.95, 0.93);
 var marron = rgb(0.14, 0.11, 0.10);
 var orange = rgb(0.93, 0.58, 0.45);
 var rouge = rgb(1, 0, 0);
-var ppsansregu = 'ppsansregu.otf';
-var ppsansextra = 'ppsansextra.otf';
+var ppsansregu = 'https://cdn.jsdelivr.net/gh/theoliberkeys/assets-agents/ppsansregu.otf';
+var ppsansextra = 'https://cdn.jsdelivr.net/gh/theoliberkeys/assets-agents/ppsansextra.otf';
 
 // Panneau simple
 async function panneau_simple(nom, numero, fichier, photo) {
@@ -318,5 +318,5 @@ async function execute() {
     // panneau_double(nom, numero, 'panneau_double_av.pdf', photo);
     // panneau_double(nom, numero, 'panneau_double_vendu.pdf', photo);
     // carte_de_visite(nom, mail, metier, numero, 'carte_de_visite.pdf', photo);
-    flyer(nom, mail, metier, numero, 'https://uploads-ssl.webflow.com/6022985415e9f66f2904c07b/65ccaffc965f2c21fd8ae20e_flyer.pdf', photo);
+    flyer(nom, mail, metier, numero, 'flyer.pdf', photo);
 }
