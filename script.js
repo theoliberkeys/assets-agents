@@ -6,7 +6,7 @@ function format_agent(nom) {
     lien_agent = lien_agent.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     return lien_agent;
 }
-
+console.log(1);
 // Récupère le numéro de téléphone
 function get_phone() {
     var numero = document.getElementById("numero").value;
@@ -14,7 +14,7 @@ function get_phone() {
     numero = numero.replace(/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
     return numero;
 }
-
+console.log(1);
 // Récupère la photo
 function get_photo() {
     var imageInput = document.getElementById('imageInput');
@@ -24,7 +24,7 @@ function get_photo() {
     image1.src = URL.createObjectURL(imageInput.files[0]);
     return image1.src;
 }
-
+console.log(1);
 // Génère le QRCode
 function get_QRCode(lien_agent) {
     const CodeQR = new QRCodeStyling({
@@ -47,13 +47,13 @@ function get_QRCode(lien_agent) {
     });
     return CodeQR;
 }
-
+console.log(1);
 // Récupère le métier
 function get_metier() {
     var metier = document.querySelector('input[name="metier"]:checked').value;
     return metier;
 }
-
+console.log(1);
 // Dessine une image
 function draw_Image(source, page, axeX, axeY, hauteur, largeur) {
     page.drawImage(source, {
@@ -63,7 +63,7 @@ function draw_Image(source, page, axeX, axeY, hauteur, largeur) {
         height: hauteur
     })
 }
-
+console.log(1);
 // Dessine du texte
 function draw_Text(source, page, axeX, axeY, taille, police, couleur) {
     page.drawText(source, {
@@ -74,7 +74,7 @@ function draw_Text(source, page, axeX, axeY, taille, police, couleur) {
         color: couleur
     })
 }
-
+console.log(1);
 // Fonctions d'exécution
 const { degrees, PDFDocument, rgb, StandardFonts } = PDFLib;
 
@@ -84,7 +84,7 @@ var orange = rgb(0.93, 0.58, 0.45);
 var rouge = rgb(1, 0, 0);
 var ppsansregu = 'ppsansregu.otf';
 var ppsansextra = 'ppsansextra.otf';
-
+console.log(1);
 // Panneau simple
 async function panneau_simple(nom, numero, fichier, photo) {
 
@@ -132,7 +132,7 @@ async function panneau_simple(nom, numero, fichier, photo) {
     var filename = fichier.includes("vendu") ? 'VENDU' : 'AV';
     download(pdfBytes, `PANNEAU_SIMPLE_${filename}.pdf`, "application/pdf");
 }
-
+console.log(1);
 async function panneau_double(nom, numero, fichier, photo) {
 
     // Récupère le fichier
