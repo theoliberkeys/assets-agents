@@ -83,8 +83,8 @@ var orange = rgb(0.93, 0.58, 0.45);
 var rouge = rgb(1, 0, 0);
 
 // Définition de la police
-var ppsansregu = 'https://assets.website-files.com/6022985415e9f66f2904c07b/64665faeb6831915adaa8a09_Fragment-SansRegular.woff';
-var ppsansextra = 'https://assets.website-files.com/6022985415e9f66f2904c07b/64665faed1747cfbdd2c6721_Fragment-SansExtraBold.woff';
+var ppsansregu = 'https://cdn.jsdelivr.net/gh/theoliberkeys/assets-agents/ppsansregu.otf';
+var ppsansextra = 'https://cdn.jsdelivr.net/gh/theoliberkeys/assets-agents/ppsansextra.otf';
 
 // Fonction pour réaliser un panneau simple
 async function panneau_simple(nom, numero, fichier, photo) {
