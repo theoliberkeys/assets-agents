@@ -30,20 +30,96 @@ function get_QRCode(lien_agent) {
         height: 200,
         type: "png",
         data: `https://liberkeys.com/agents/${lien_agent}`,
-        image: "https://uploads-ssl.webflow.com/6022985415e9f66f2904c07b/65ccaff32f54e9dbba3a4dd4_lk.png",
-        dotsOptions: {
-            color: "#241C1A",
-            type: ""
-        },
-        backgroundOptions: {
-            color: "#ffffff",
+        image: "https://uploads-ssl.webflow.com/6022985415e9f66f2904c07b/65eed933aa7b1a8118ed5b37_lk.png",
+        margin: 0,
+        qrOptions: {
+            typeNumber: 0,
+            mode: "Byte",
+            errorCorrectionLevel: "Q"
         },
         imageOptions: {
             crossOrigin: "anonymous",
-            margin: -60
+            imageSize: 0.3,
+            margin: 0
+        },
+        dotsOptions: {
+            type: "square",
+            color: "#241c1a"
+        },
+        backgroundOptions: {
+            color: "#ffffff"
+        },
+        dotsOptionsHelper: {
+            colorType: {
+                single: true,
+                gradient: false
+            },
+            gradient: {
+                linear: true,
+                radial: false,
+                color1: "#6a1a4c",
+                color2: "#6a1a4c",
+                rotation: "0"
+            }
+        },
+        cornersDotOptions: {
+            type: "square",
+            color: "#241c1a"
         }
     });
     return CodeQR;
+}
+
+async function image_to_png(imgValue) {
+    let pngImageBytes = await fetch(imgValue).then(res => res.arrayBuffer())
+    return pngImageBytes;
+}
+
+async function qr_to_png(lien_agent) {
+    const qrCode = new QRCodeStyling({
+        width: 400,
+        height: 400,
+        type: "png",
+        data: `https://liberkeys.com/agents/${lien_agent}`,
+        image: "https://uploads-ssl.webflow.com/6022985415e9f66f2904c07b/65eed933aa7b1a8118ed5b37_lk.png",
+        margin: 0,
+        qrOptions: {
+            typeNumber: 0,
+            mode: "Byte",
+            errorCorrectionLevel: "Q"
+        },
+        imageOptions: {
+            crossOrigin: "anonymous",
+            imageSize: 0.4,
+            margin: 0
+        },
+        dotsOptions: {
+            type: "square",
+            color: "#241c1a"
+        },
+        backgroundOptions: {
+            color: "#ffffff"
+        },
+        dotsOptionsHelper: {
+            colorType: {
+                single: true,
+                gradient: false
+            },
+            gradient: {
+                linear: true,
+                radial: false,
+                color1: "#6a1a4c",
+                color2: "#6a1a4c",
+                rotation: "0"
+            }
+        },
+        cornersDotOptions: {
+            type: "square",
+            color: "#241c1a"
+        }
+    });
+    let pngImageBytes = await qrCode.getRawData("png").then(res => res.arrayBuffer())
+    return pngImageBytes;
 }
 
 // Récupère le métier
@@ -115,7 +191,7 @@ async function panneau_simple(nom, numero, fichier, photo) {
     excedent = (excedent < 0) ? 0 : excedent;
 
     // Place le nom et le numéro
-    draw_Text(nom, firstPage, (630 - (excedent * 20)), 185, (145 - excedent), ppregu, orange)
+    draw_Text(nom, firstPage, (630 - (excedent * 14)), 185, Math.round(145 - (excedent * 2.7)), ppregu, orange)
     draw_Text(numero, firstPage, 160, 400, 200, ppextra, marron)
 
     // Récupère l'image
@@ -125,7 +201,7 @@ async function panneau_simple(nom, numero, fichier, photo) {
     const pngDims = pngImage.scale(0.5)
 
     // Place l'image
-    draw_Image(pngImage, firstPage, (250 - (excedent * 16)), 60, (pngDims.width - (excedent * 2)), (pngDims.height - (excedent * 2)))
+    draw_Image(pngImage, firstPage, (250 - (excedent * 10)), 60, (pngDims.width - (excedent * 2)), (pngDims.height - (excedent * 2)))
 
     const pdfBytes = await pdfDoc.save()
 
@@ -161,8 +237,8 @@ async function panneau_double(nom, numero, fichier, photo) {
     excedent = (excedent < 0) ? 0 : excedent;
 
     // Place le nom et le numéro
-    draw_Text(nom, firstPage, (505 - (excedent * 7)), 240, (130 - (excedent * 2)), ppregu, orange)
-    draw_Text(nom, firstPage, (2205 - (excedent * 7)), 240, (130 - (excedent * 2)), ppregu, orange)
+    draw_Text(nom, firstPage, (505 - (excedent * 7)), 240, (130 - (excedent * 3)), ppregu, orange)
+    draw_Text(nom, firstPage, (2205 - (excedent * 7)), 240, (130 - (excedent * 3)), ppregu, orange)
 
     draw_Text(numero, firstPage, 165, 467, 164, ppextra, marron)
     draw_Text(numero, firstPage, 1865, 467, 164, ppextra, marron)
@@ -211,7 +287,7 @@ async function carte_de_visite(nom, mail, metier, numero, fichier, photo) {
     excedent = (excedent < 0) ? 0 : excedent;
 
     // Place le nom, le métier, le numéro et le mail
-    draw_Text(nom, firstPage, 15, 136, 10, ppextra, orange)
+    draw_Text(nom, firstPage, 15, 136, 10 - (excedent / 15), ppextra, orange)
     draw_Text(metier, firstPage, 15, 118, 10, ppregu, beige)
     draw_Text(numero, firstPage, 15, 100, 8, ppregu, beige)
     draw_Text(mail, firstPage, 15, 82, 8, ppregu, beige)
