@@ -321,7 +321,7 @@ async function carte_de_visite(nom, mail, metier, numero, fichier, photo) {
 // Fonction pour réaliser le flyer
 async function flyer(nom, mail, metier, numero, fichier, photo) {
     var meilleure = metier == "Conseiller immobilier" ? " meilleur" : " meilleure";
-    meilleure = "je serais votre" + meilleure;
+    meilleure = "je serai votre" + meilleure;
 
     var allie = metier == "Conseiller immobilier" ? "allié " : "alliée ";
     allie = allie + "immobilier";
