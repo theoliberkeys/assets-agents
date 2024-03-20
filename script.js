@@ -191,7 +191,7 @@ async function panneau_simple(nom, numero, fichier, photo) {
     excedent = (excedent < 0) ? 0 : excedent;
 
     // Place le nom et le numéro
-    draw_Text(nom, firstPage, (630 - (excedent * 14)), 185, Math.round(145 - (excedent * 2.7)), ppregu, orange)
+    draw_Text(nom, firstPage, (630 - (excedent * 14)), 185, Math.round(145 - (excedent * 2.9)), ppregu, orange)
     draw_Text(numero, firstPage, 160, 400, 200, ppextra, marron)
 
     // Récupère l'image
@@ -285,12 +285,13 @@ async function carte_de_visite(nom, mail, metier, numero, fichier, photo) {
 
     var excedent = (nom.length - 11);
     excedent = (excedent < 0) ? 0 : excedent;
+    var mail_excedent = mail.length > 35 ? Math.round((mail.length - 35) / 6) : 0;
 
     // Place le nom, le métier, le numéro et le mail
-    draw_Text(nom, firstPage, 15, 136, 10 - (excedent / 15), ppextra, orange)
+    draw_Text(nom, firstPage, 15, 136, 10 - (excedent / 11), ppextra, orange)
     draw_Text(metier, firstPage, 15, 118, 10, ppregu, beige)
     draw_Text(numero, firstPage, 15, 100, 8, ppregu, beige)
-    draw_Text(mail, firstPage, 15, 82, 8, ppregu, beige)
+    draw_Text(mail, firstPage, 15, 82, 8 - mail_excedent, ppregu, beige)
     draw_Text("www.liberkeys.com", firstPage, 15, 64, 8, ppregu, orange)
 
     // Récupère l'image
@@ -321,7 +322,7 @@ async function carte_de_visite(nom, mail, metier, numero, fichier, photo) {
 // Fonction pour réaliser le flyer
 async function flyer(nom, mail, metier, numero, fichier, photo) {
     var meilleure = metier == "Conseiller immobilier" ? " meilleur" : " meilleure";
-    meilleure = "je serai votre" + meilleure;
+    meilleure = "je serais votre" + meilleure;
 
     var allie = metier == "Conseiller immobilier" ? "allié " : "alliée ";
     allie = allie + "immobilier";
