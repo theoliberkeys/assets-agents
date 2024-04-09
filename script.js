@@ -19,7 +19,11 @@ function get_photo() {
     var image1 = new Image();
     console.log(imageInput.files[0])
     console.log(imageInput)
-    image1.src = URL.createObjectURL(imageInput.files[0]);
+    try {
+        image1.src = URL.createObjectURL(imageInput.files[0]);
+    } catch (error) {
+        return null;
+    }
     return image1.src;
 }
 
@@ -164,7 +168,6 @@ var ppsansextra = 'https://cdn.jsdelivr.net/gh/theoliberkeys/assets-agents/ppsan
 
 // Fonction pour réaliser un panneau simple
 async function panneau_simple(nom, numero, fichier, photo) {
-
     // Récupère le fichier
     const url = fichier;
     const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
@@ -191,17 +194,20 @@ async function panneau_simple(nom, numero, fichier, photo) {
     excedent = (excedent < 0) ? 0 : excedent;
 
     // Place le nom et le numéro
-    draw_Text(nom, firstPage, (630 - (excedent * 14)), 185, Math.round(145 - (excedent * 2.9)), ppregu, orange)
-    draw_Text(numero, firstPage, 160, 400, 200, ppextra, marron)
-
-    // Récupère l'image
-    const lienimage = photo;
-    const pngImageBytes = await fetch(lienimage).then(res => res.arrayBuffer())
-    const pngImage = await pdfDoc.embedPng(pngImageBytes)
-    const pngDims = pngImage.scale(0.5)
-
-    // Place l'image
-    draw_Image(pngImage, firstPage, (250 - (excedent * 10)), 60, (pngDims.width - (excedent * 2)), (pngDims.height - (excedent * 2)))
+    if (photo != null) {
+        draw_Text(nom, firstPage, (630 - (excedent * 14)), 185, Math.round(145 - (excedent * 2.9)), ppregu, orange)
+        draw_Text(numero, firstPage, ((width - ppextra.widthOfTextAtSize(numero, 200)) / 2), 400, 200, ppextra, marron)
+        // Récupère l'image
+        const lienimage = photo;
+        const pngImageBytes = await fetch(lienimage).then(res => res.arrayBuffer())
+        const pngImage = await pdfDoc.embedPng(pngImageBytes)
+        const pngDims = pngImage.scale(0.5)
+        // Place l'image
+        draw_Image(pngImage, firstPage, (250 - (excedent * 10)), 60, (pngDims.width - (excedent * 2)), (pngDims.height - (excedent * 2)))
+    } else {
+        draw_Text(numero, firstPage, ((width - ppextra.widthOfTextAtSize(numero, 200)) / 2), 390, 200, ppextra, marron)
+        draw_Text(nom, firstPage, ((width - ppregu.widthOfTextAtSize(nom, Math.round(145 - (excedent * 1.75)))) / 2), 185, Math.round(145 - (excedent * 1.75)), ppregu, orange)
+    }
 
     const pdfBytes = await pdfDoc.save()
 
@@ -237,21 +243,25 @@ async function panneau_double(nom, numero, fichier, photo) {
     excedent = (excedent < 0) ? 0 : excedent;
 
     // Place le nom et le numéro
-    draw_Text(nom, firstPage, (505 - (excedent * 7)), 240, (130 - (excedent * 3)), ppregu, orange)
-    draw_Text(nom, firstPage, (2205 - (excedent * 7)), 240, (130 - (excedent * 3)), ppregu, orange)
+    if (photo != null) {
+        draw_Text(nom, firstPage, (505 - (excedent * 7)), 240, (130 - (excedent * 3)), ppregu, orange)
+        draw_Text(nom, firstPage, (2205 - (excedent * 7)), 240, (130 - (excedent * 3)), ppregu, orange)
+        // Récupère l'image
+        const lienimage = photo;
+        const pngImageBytes = await fetch(lienimage).then(res => res.arrayBuffer())
+        const pngImage = await pdfDoc.embedPng(pngImageBytes)
+        const pngDims = pngImage.scale(0.475)
+        // Place l'image
+        draw_Image(pngImage, firstPage, (170 - (excedent * 7)), 85, pngDims.width, pngDims.height)
+        draw_Image(pngImage, firstPage, (1870 - (excedent * 7)), 85, pngDims.width, pngDims.height)
 
-    draw_Text(numero, firstPage, 165, 467, 164, ppextra, marron)
-    draw_Text(numero, firstPage, 1865, 467, 164, ppextra, marron)
+    } else {
+        draw_Text(nom, firstPage, (width / 2 - ppregu.widthOfTextAtSize(nom, Math.round(130 - (excedent * 2)))) / 2, 240, (130 - (excedent * 2)), ppregu, orange)
+        draw_Text(nom, firstPage, (width / 2 - ppregu.widthOfTextAtSize(nom, Math.round(130 - (excedent * 2)))) / 2 + width / 2, 240, (130 - (excedent * 2)), ppregu, orange)
+    }
 
-    // Récupère l'image
-    const lienimage = photo;
-    const pngImageBytes = await fetch(lienimage).then(res => res.arrayBuffer())
-    const pngImage = await pdfDoc.embedPng(pngImageBytes)
-    const pngDims = pngImage.scale(0.475)
-
-    // Place l'image
-    draw_Image(pngImage, firstPage, (170 - (excedent * 7)), 85, pngDims.width, pngDims.height)
-    draw_Image(pngImage, firstPage, (1870 - (excedent * 7)), 85, pngDims.width, pngDims.height)
+    draw_Text(numero, firstPage, (width / 2 - ppextra.widthOfTextAtSize(numero, 164)) / 2, 467, 164, ppextra, marron)
+    draw_Text(numero, firstPage, (width / 2 - ppextra.widthOfTextAtSize(numero, 164)) / 2 + width / 2, 467, 164, ppextra, marron)
 
     const pdfBytes = await pdfDoc.save()
 
@@ -295,13 +305,15 @@ async function carte_de_visite(nom, mail, metier, numero, fichier, photo) {
     draw_Text("www.liberkeys.com", firstPage, 15, 64, 8, ppregu, orange)
 
     // Récupère l'image
-    var lienimage = photo;
-    var pngImageBytes = await fetch(lienimage).then(res => res.arrayBuffer())
-    var pngImage = await pdfDoc.embedPng(pngImageBytes)
-    var pngDims = pngImage.scale(0.10)
-
-    // Place l'image
-    draw_Image(pngImage, firstPage, 167, 85, pngDims.width, pngDims.height)
+    if(photo != null) {
+        var lienimage = photo;
+        var pngImageBytes = await fetch(lienimage).then(res => res.arrayBuffer())
+        var pngImage = await pdfDoc.embedPng(pngImageBytes)
+        var pngDims = pngImage.scale(0.10)
+    
+        // Place l'image
+        draw_Image(pngImage, firstPage, 167, 85, pngDims.width, pngDims.height)
+    }
 
     // Récupère le lien
     var lien_agent = format_agent(nom);
@@ -357,13 +369,15 @@ async function flyer(nom, mail, metier, numero, fichier, photo) {
     draw_Text(mail, firstPage, ((width - ppregu.widthOfTextAtSize(mail, 14)) / 2), 275, 14, ppregu, marron)
 
     // Récupère l'image
-    var lienimage = photo;
-    var pngImageBytes = await fetch(lienimage).then(res => res.arrayBuffer())
-    var pngImage = await pdfDoc.embedPng(pngImageBytes)
-    var pngDims = pngImage.scale(0.12)
+    if(photo != null) {
+        var lienimage = photo;
+        var pngImageBytes = await fetch(lienimage).then(res => res.arrayBuffer())
+        var pngImage = await pdfDoc.embedPng(pngImageBytes)
+        var pngDims = pngImage.scale(0.12)
 
-    // Place l'image
-    draw_Image(pngImage, firstPage, 172, 490, pngDims.width, pngDims.height)
+        // Place l'image
+        draw_Image(pngImage, firstPage, 172, 490, pngDims.width, pngDims.height)
+    }
 
     // Récupère le lien
     var lien_agent = format_agent(nom);
