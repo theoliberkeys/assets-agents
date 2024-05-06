@@ -290,7 +290,7 @@ async function carte_de_visite(nom, mail, metier, numero, fichier, photo) {
 
     // Récupère les pages
     const pages = pdfDoc.getPages()
-    const firstPage = pages[1]
+    const firstPage = pages[0]
     const { width, height } = firstPage.getSize()
 
     var excedent = (nom.length - 11);
