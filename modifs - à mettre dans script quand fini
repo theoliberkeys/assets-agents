@@ -154,6 +154,7 @@ function draw_Image(source, page, axeX, axeY, hauteur, largeur) {
 
 // Dessine du texte
 function draw_Text(source, page, axeX, axeY, taille, police, couleur, angle = 0) {
+    const radians = angle * (Math.PI / 180)
     // Sauvegarde l'état de la page avant transformation
     page.save();     
     // Déplace l'origine à l'endroit où le texte sera dessiné
@@ -214,8 +215,8 @@ async function panneau_simple(nom, numero, fichier, photo) {
 
     // Place le nom et le numéro
     if (photo != null) {
-        draw_Text(nom, firstPage, (630 - (excedent * 14)), 185, Math.round(145 - (excedent * 2.9)), ppregu, orange)
-        draw_Text(numero, firstPage, ((width - ppextra.widthOfTextAtSize(numero, 200)) / 2), 400, 200, ppextra, marron)
+        draw_Text(nom, firstPage, (630 - (excedent * 14)), 185, Math.round(145 - (excedent * 2.9)), ppregu, orange, 0)
+        draw_Text(numero, firstPage, ((width - ppextra.widthOfTextAtSize(numero, 200)) / 2), 400, 200, ppextra, marron, 0)
         // Récupère l'image
         const lienimage = photo;
         const pngImageBytes = await fetch(lienimage).then(res => res.arrayBuffer())
@@ -224,8 +225,8 @@ async function panneau_simple(nom, numero, fichier, photo) {
         // Place l'image
         draw_Image(pngImage, firstPage, (250 - (excedent * 10)), 60, (pngDims.width - (excedent * 2)), (pngDims.height - (excedent * 2)))
     } else {
-        draw_Text(numero, firstPage, ((width - ppextra.widthOfTextAtSize(numero, 200)) / 2), 390, 200, ppextra, marron)
-        draw_Text(nom, firstPage, ((width - ppregu.widthOfTextAtSize(nom, Math.round(145 - (excedent * 1.75)))) / 2), 185, Math.round(145 - (excedent * 1.75)), ppregu, orange)
+        draw_Text(numero, firstPage, ((width - ppextra.widthOfTextAtSize(numero, 200)) / 2), 390, 200, ppextra, marron, 0)
+        draw_Text(nom, firstPage, ((width - ppregu.widthOfTextAtSize(nom, Math.round(145 - (excedent * 1.75)))) / 2), 185, Math.round(145 - (excedent * 1.75)), ppregu, orange, 0)
     }
 
     const pdfBytes = await pdfDoc.save()
@@ -263,8 +264,8 @@ async function panneau_double(nom, numero, fichier, photo) {
 
     // Place le nom et le numéro
     if (photo != null) {
-        draw_Text(nom, firstPage, (505 - (excedent * 7)), 240, (130 - (excedent * 3)), ppregu, orange)
-        draw_Text(nom, firstPage, (2205 - (excedent * 7)), 240, (130 - (excedent * 3)), ppregu, orange)
+        draw_Text(nom, firstPage, (505 - (excedent * 7)), 240, (130 - (excedent * 3)), ppregu, orange, 0)
+        draw_Text(nom, firstPage, (2205 - (excedent * 7)), 240, (130 - (excedent * 3)), ppregu, orange, 0)
         // Récupère l'image
         const lienimage = photo;
         const pngImageBytes = await fetch(lienimage).then(res => res.arrayBuffer())
@@ -275,12 +276,12 @@ async function panneau_double(nom, numero, fichier, photo) {
         draw_Image(pngImage, firstPage, (1870 - (excedent * 7)), 85, pngDims.width, pngDims.height)
 
     } else {
-        draw_Text(nom, firstPage, (width / 2 - ppregu.widthOfTextAtSize(nom, Math.round(130 - (excedent * 2)))) / 2, 240, (130 - (excedent * 2)), ppregu, orange)
-        draw_Text(nom, firstPage, (width / 2 - ppregu.widthOfTextAtSize(nom, Math.round(130 - (excedent * 2)))) / 2 + width / 2, 240, (130 - (excedent * 2)), ppregu, orange)
+        draw_Text(nom, firstPage, (width / 2 - ppregu.widthOfTextAtSize(nom, Math.round(130 - (excedent * 2)))) / 2, 240, (130 - (excedent * 2)), ppregu, orange, 0)
+        draw_Text(nom, firstPage, (width / 2 - ppregu.widthOfTextAtSize(nom, Math.round(130 - (excedent * 2)))) / 2 + width / 2, 240, (130 - (excedent * 2)), ppregu, orange, 0)
     }
 
-    draw_Text(numero, firstPage, (width / 2 - ppextra.widthOfTextAtSize(numero, 164)) / 2, 467, 164, ppextra, marron)
-    draw_Text(numero, firstPage, (width / 2 - ppextra.widthOfTextAtSize(numero, 164)) / 2 + width / 2, 467, 164, ppextra, marron)
+    draw_Text(numero, firstPage, (width / 2 - ppextra.widthOfTextAtSize(numero, 164)) / 2, 467, 164, ppextra, marron, 0)
+    draw_Text(numero, firstPage, (width / 2 - ppextra.widthOfTextAtSize(numero, 164)) / 2 + width / 2, 467, 164, ppextra, marron, 0)
 
     const pdfBytes = await pdfDoc.save()
 
@@ -317,11 +318,11 @@ async function carte_de_visite(nom, mail, metier, numero, fichier, photo) {
     var mail_excedent = mail.length > 35 ? Math.round((mail.length - 35) / 6) : 0;
 
     // Place le nom, le métier, le numéro et le mail
-    draw_Text(nom, firstPage, 15, 136, 10 - (excedent / 11), ppextra, orange)
-    draw_Text(metier, firstPage, 15, 118, 10, ppregu, beige)
-    draw_Text(numero, firstPage, 15, 100, 8, ppregu, beige)
-    draw_Text(mail, firstPage, 15, 82, 8 - mail_excedent, ppregu, beige)
-    draw_Text("www.liberkeys.com", firstPage, 15, 64, 8, ppregu, orange)
+    draw_Text(nom, firstPage, 15, 136, 10 - (excedent / 11), ppextra, orange, 0)
+    draw_Text(metier, firstPage, 15, 118, 10, ppregu, beige, 0)
+    draw_Text(numero, firstPage, 15, 100, 8, ppregu, beige, 0)
+    draw_Text(mail, firstPage, 15, 82, 8 - mail_excedent, ppregu, beige, 0)
+    draw_Text("www.liberkeys.com", firstPage, 15, 64, 8, ppregu, orange, 0)
 
     // Récupère l'image
     if(photo != null) {
@@ -380,12 +381,16 @@ async function flyer(nom, mail, metier, numero, fichier, photo) {
     const { width, height } = firstPage.getSize()
 
     // Place le nom, le métier, le numéro et le mail
-    draw_Text(nom, firstPage, ((width - ppextra.widthOfTextAtSize(nom, 14)) / 2), 339, 14, ppextra, marron)
-    draw_Text(meilleure, firstPage, ((width - ppregu.widthOfTextAtSize(meilleure, 20)) / 2), 406, 20, ppregu, marron)
-    draw_Text(allie, firstPage, ((width - ppregu.widthOfTextAtSize(allie, 20)) / 2), 379, 20, ppregu, marron)
-    draw_Text(metier, firstPage, ((width - ppregu.widthOfTextAtSize(metier, 14)) / 2), 320, 14, ppregu, marron)
-    draw_Text(numero, firstPage, ((width - ppregu.widthOfTextAtSize(numero, 14)) / 2), 297, 14, ppregu, marron)
-    draw_Text(mail, firstPage, ((width - ppregu.widthOfTextAtSize(mail, 14)) / 2), 275, 14, ppregu, marron)
+    draw_Text(nom, firstPage, ((width - ppextra.widthOfTextAtSize(nom, 14)) / 2), 339, 14, ppextra, marron, 0)
+    draw_Text(meilleure, firstPage, ((width - ppregu.widthOfTextAtSize(meilleure, 20)) / 2), 406, 20, ppregu, marron, 0)
+    draw_Text(allie, firstPage, ((width - ppregu.widthOfTextAtSize(allie, 20)) / 2), 379, 20, ppregu, marron, 0)
+    draw_Text(metier, firstPage, ((width - ppregu.widthOfTextAtSize(metier, 14)) / 2), 320, 14, ppregu, marron, 0)
+    draw_Text(numero, firstPage, ((width - ppregu.widthOfTextAtSize(numero, 14)) / 2), 297, 14, ppregu, marron, 0)
+    draw_Text(mail, firstPage, ((width - ppregu.widthOfTextAtSize(mail, 14)) / 2), 275, 14, ppregu, marron, 0)
+
+    // Récupère le RSAC
+    const rsacText = get_RSAC();
+    draw_Text(rsacText, firstPage, 15, 50, 6, ppregu, marron, 90);
 
     // Récupère l'image
     if(photo != null) {
