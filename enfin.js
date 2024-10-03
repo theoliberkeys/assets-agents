@@ -158,7 +158,7 @@ function draw_Text(source, page, axeX, axeY, taille, police, couleur, angle) {
         size: taille,
         font: police,
         color: couleur,
-        rotate: angle,
+        rotate: degrees(angle),
     });
 }
 
