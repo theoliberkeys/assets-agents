@@ -148,23 +148,20 @@ function draw_Image(source, page, axeX, axeY, hauteur, largeur) {
     })
 }
 
-// Dessine du texte
+// Dessine du texte sur la page
 function draw_Text(source, page, axeX, axeY, taille, police, couleur, angle = 0) {
+    // Convertit l'angle en radians
     const radians = angle * (Math.PI / 180);
-    // Déplace l'origine à l'endroit où le texte sera dessiné
-    page.translate(axeX, axeY); 
-    // Applique la rotation
-    page.rotate(radians);  
-    // Dessine le texte à (0, 0) car l'origine a été déplacée
+    
+    // Dessine le texte à la position spécifiée
     page.drawText(source, {
-        x: 0, 
-        y: 0, 
+        x: axeX,
+        y: axeY,
         size: taille,
         font: police,
-        color: couleur
-    });  
-    // Restaure l'état de la page pour revenir à la normale
-    page.restore(); 
+        color: couleur,
+        rotate: radians // Applique la rotation si disponible
+    });
 }
 
 // Récupère les bibliothèques nécessaires
