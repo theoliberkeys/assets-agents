@@ -361,12 +361,12 @@ async function flyer(nom, mail, metier, numero, fichier, photo) {
     const { width, height } = firstPage.getSize()
 
     // Place le nom, le métier, le numéro et le mail
-    draw_Text(nom, firstPage, ((width - ppextra.widthOfTextAtSize(nom, 14)) / 2), 289, 14, ppextra, marron)
-    draw_Text(meilleure, firstPage, ((width - ppregu.widthOfTextAtSize(meilleure, 20)) / 2), 356, 20, ppregu, marron)
-    draw_Text(allie, firstPage, ((width - ppregu.widthOfTextAtSize(allie, 20)) / 2), 329, 20, ppregu, marron)
-    draw_Text(metier, firstPage, ((width - ppregu.widthOfTextAtSize(metier, 14)) / 2), 270, 14, ppregu, marron)
-    draw_Text(numero, firstPage, ((width - ppregu.widthOfTextAtSize(numero, 14)) / 2), 247, 14, ppregu, marron)
-    draw_Text(mail, firstPage, ((width - ppregu.widthOfTextAtSize(mail, 14)) / 2), 225, 14, ppregu, marron)
+    draw_Text(nom, firstPage, ((width - ppextra.widthOfTextAtSize(nom, 14)) / 2), 334, 14, ppextra, marron)
+    draw_Text(meilleure, firstPage, ((width - ppregu.widthOfTextAtSize(meilleure, 20)) / 2), 401, 20, ppregu, marron)
+    draw_Text(allie, firstPage, ((width - ppregu.widthOfTextAtSize(allie, 20)) / 2), 374, 20, ppregu, marron)
+    draw_Text(metier, firstPage, ((width - ppregu.widthOfTextAtSize(metier, 14)) / 2), 315, 14, ppregu, marron)
+    draw_Text(numero, firstPage, ((width - ppregu.widthOfTextAtSize(numero, 14)) / 2), 292, 14, ppregu, marron)
+    draw_Text(mail, firstPage, ((width - ppregu.widthOfTextAtSize(mail, 14)) / 2), 270, 14, ppregu, marron)
 
     // Récupère l'image
     if(photo != null) {
