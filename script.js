@@ -5,7 +5,7 @@ function format_agent(nom) {
     return lien_agent;
 }
 
-// Récupère le numéro de téléphone
+// Récupère le numéro de téléphone 
 function get_phone() {
     var numero = document.getElementById("numero").value;
     numero = numero.replace(/\s/g, '');
