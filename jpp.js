@@ -149,9 +149,7 @@ function draw_Image(source, page, axeX, axeY, hauteur, largeur) {
 }
 
 // Dessine du texte sur la page
-function draw_Text(source, page, axeX, axeY, taille, police, couleur, angle = 0) {
-    // Convertit l'angle en radians
-    const radians = angle * (Math.PI / 180);
+function draw_Text(source, page, axeX, axeY, taille, police, couleur, angle) {
     
     // Dessine le texte à la position spécifiée
     page.drawText(source, {
@@ -160,7 +158,7 @@ function draw_Text(source, page, axeX, axeY, taille, police, couleur, angle = 0)
         size: taille,
         font: police,
         color: couleur,
-        rotate: radians // Applique la rotation si disponible
+        rotate: angle,
     });
 }
 
