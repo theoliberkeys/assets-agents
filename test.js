@@ -150,13 +150,11 @@ function draw_Image(source, page, axeX, axeY, hauteur, largeur) {
 
 // Dessine du texte
 function draw_Text(source, page, axeX, axeY, taille, police, couleur, angle = 0) {
-    const radians = angle * (Math.PI / 180)
-    // Sauvegarde l'état de la page avant transformation
-    page.save();     
+    const radians = angle * (Math.PI / 180);
     // Déplace l'origine à l'endroit où le texte sera dessiné
     page.translate(axeX, axeY); 
     // Applique la rotation
-    page.rotate(degrees(angle));  
+    page.rotate(radians);  
     // Dessine le texte à (0, 0) car l'origine a été déplacée
     page.drawText(source, {
         x: 0, 
