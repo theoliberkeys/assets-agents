@@ -394,7 +394,7 @@ async function flyer(nom, mail, metier, numero, fichier, photo) {
         var pngDims = pngImage.scale(0.12)
 
         // Place l'image
-        draw_Image(pngImage, firstPage, 172, 490, pngDims.width, pngDims.height)
+        draw_Image(pngImage, firstPage, 172, 485, pngDims.width, pngDims.height)
     }
 
     // Récupère le lien
