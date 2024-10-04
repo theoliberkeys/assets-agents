@@ -315,7 +315,7 @@ async function carte_de_visite(nom, mail, metier, numero, fichier, photo) {
 
     // Récupère le RSAC
     const rsacText = get_RSAC();
-    draw_Text(rsacText, firstPage, 15, 200, 3, ppregu, marron, 90);
+    draw_Text(rsacText, firstPage, 15, 200, 3, ppregu, beige, 90);
 
     // Récupère l'image
     if(photo != null) {
@@ -383,7 +383,7 @@ async function flyer(nom, mail, metier, numero, fichier, photo) {
 
     // Récupère le RSAC
     const rsacText = get_RSAC() + " - Ne pas jeter sur la voie publique";
-    draw_Text(rsacText, firstPage, (width - 25), 265, 6, ppregu, marron, 90);
+    draw_Text(rsacText, firstPage, (width - 15), 265, 4, ppregu, marron, 90);
 
     // Récupère l'image
     if(photo != null) {
