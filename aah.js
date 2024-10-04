@@ -315,7 +315,8 @@ async function carte_de_visite(nom, mail, metier, numero, fichier, photo) {
 
     // Récupère le RSAC
     const rsacText = get_RSAC();
-    draw_Text(rsacText, firstPage, 15, 185, 3, ppregu, beige, 0);
+    console.log(rsacText);
+    draw_Text(rsacText, firstPage, 15, 50, 6, ppregu, beige, 0);
 
     // Récupère l'image
     if(photo != null) {
