@@ -220,7 +220,7 @@ async function panneau_simple(nom, numero, fichier, photo) {
     }
 
     const rsacText = get_RSAC();
-    draw_Text(rsacText, firstPage, (width - 30), 745, 16, ppregu, beige, 90);
+    draw_Text(rsacText, firstPage, (width - 30), 740, 16, ppregu, beige, 90);
 
     const pdfBytes = await pdfDoc.save()
 
@@ -277,7 +277,7 @@ async function panneau_double(nom, numero, fichier, photo) {
     draw_Text(numero, firstPage, (width / 2 - ppextra.widthOfTextAtSize(numero, 164)) / 2 + width / 2, 467, 164, ppextra, marron, 0)
 
     const rsacText = get_RSAC();
-    draw_Text(rsacText, firstPage, (width - 30), 900, 16, ppregu, beige, 90);
+    draw_Text(rsacText, firstPage, (width - 30), 890, 16, ppregu, beige, 90);
 
     const pdfBytes = await pdfDoc.save()
 
