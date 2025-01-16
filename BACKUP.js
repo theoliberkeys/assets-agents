@@ -273,10 +273,6 @@ async function panneau_double(nom, numero, fichier, photo) {
     draw_Text(numero, firstPage, (width / 2 - ppextra.widthOfTextAtSize(numero, 164)) / 2, 467, 164, ppextra, marron, 0)
     draw_Text(numero, firstPage, (width / 2 - ppextra.widthOfTextAtSize(numero, 164)) / 2 + width / 2, 467, 164, ppextra, marron, 0)
 
-    const rsacText = get_RSAC();
-    console.log(rsacText);
-    draw_Text(rsacText, firstPage, 15, 18, 3, ppregu, beige, 0);
-
     const pdfBytes = await pdfDoc.save()
 
     // Enregistre le fichier
