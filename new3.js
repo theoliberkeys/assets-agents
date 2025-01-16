@@ -221,7 +221,7 @@ async function panneau_simple(nom, numero, fichier, photo) {
 
     const rsacText = get_RSAC();
     console.log(rsacText);
-    draw_Text(rsacText, firstPage, 15, 256, 9, ppregu, beige, 90);
+    draw_Text(rsacText, firstPage, 30, 770, 16, ppregu, beige, 90);
 
     const pdfBytes = await pdfDoc.save()
 
