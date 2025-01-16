@@ -218,6 +218,10 @@ async function panneau_simple(nom, numero, fichier, photo) {
         draw_Text(nom, firstPage, ((width - ppregu.widthOfTextAtSize(nom, Math.round(145 - (excedent * 1.75)))) / 2), 185, Math.round(145 - (excedent * 1.75)), ppregu, orange, 0)
     }
 
+    const rsacText = get_RSAC();
+    console.log(rsacText);
+    draw_Text(rsacText, firstPage, 15, 18, 3, ppregu, beige, 0);
+
     const pdfBytes = await pdfDoc.save()
 
     // Enregistre le fichier
