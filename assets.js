@@ -16,8 +16,8 @@ function get_phone() {
 
 // Récupère le RSAC
 function get_RSAC() {
-    var rsac = document.getElementById("rsac").value;
-    return "Agent commercial indépendant au nom de Liberkeys - R.S.A.C " + rsac;
+    var rsac = document.getElementById("rsac").value.trim();
+    return rsac ? "Agent commercial indépendant au nom de Liberkeys - R.S.A.C " + rsac : "";
 }
 
 // Récupère la photo
@@ -220,7 +220,9 @@ async function panneau_simple(nom, numero, fichier, photo) {
     }
 
     const rsacText = get_RSAC();
-    draw_Text(rsacText, firstPage, (width - 30), 740, 16, ppregu, beige, 90);
+    if (rsacText) {
+        draw_Text(rsacText, firstPage, (width - 30), 740, 16, ppregu, beige, 90);
+    }
 
     const pdfBytes = await pdfDoc.save()
 
@@ -277,7 +279,9 @@ async function panneau_double(nom, numero, fichier, photo) {
     draw_Text(numero, firstPage, (width / 2 - ppextra.widthOfTextAtSize(numero, 164)) / 2 + width / 2, 467, 164, ppextra, marron, 0)
 
     const rsacText = get_RSAC();
-    draw_Text(rsacText, firstPage, (width - 30), 890, 16, ppregu, beige, 90);
+    if (rsacText) {
+        draw_Text(rsacText, firstPage, (width - 30), 890, 16, ppregu, beige, 90);
+    }
 
     const pdfBytes = await pdfDoc.save()
 
@@ -322,8 +326,9 @@ async function carte_de_visite(nom, mail, metier, numero, fichier, photo) {
 
     // Récupère le RSAC
     const rsacText = get_RSAC();
-    console.log(rsacText);
-    draw_Text(rsacText, firstPage, 15, 18, 3, ppregu, beige, 0);
+    if (rsacText) {
+        draw_Text(rsacText, firstPage, 15, 18, 3, ppregu, beige, 0);
+    }
 
     // Récupère l'image
     if(photo != null) {
@@ -391,7 +396,9 @@ async function flyer(nom, mail, metier, numero, fichier, photo) {
 
     // Récupère le RSAC
     const rsacText = get_RSAC() + " - Ne pas jeter sur la voie publique";
-    draw_Text(rsacText, firstPage, (width - 15), 265, 4, ppregu, marron, 90);
+    if (rsacText) {
+        draw_Text(rsacText, firstPage, (width - 15), 265, 4, ppregu, marron, 90);
+    }
 
     // Récupère l'image
     if(photo != null) {
